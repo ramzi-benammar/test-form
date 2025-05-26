@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulaire de test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .config-section {
+            margin-bottom: 30px;
+            padding: 15px;
+            background-color: #f5f5f5;
+            border-radius: 4px;
+            border-left: 4px solid #4CAF50;
+        }
+    </style>
+</head>
+<body>
+    <h1>Formulaire de réservation</h1>
+    
+    <!-- Section de configuration séparée du formulaire -->
+    <div class="config-section">
+        <div class="form-group">
+            <label for="redirectUrl">Url de redirection:</label>
+            <input type="url" id="redirectUrl" required>
+            <small>(Cette URL sera utilisée pour soumettre le formulaire)</small>
+        </div>
+    </div>
+    
+    <form id="reservationForm" action="" method="POST">
+        <div class="form-group">
+            <label for="cottageNumbers">Cottage number(s) (* séparés par des virgules si plusieurs cottages):</label>
+            <input type="text" id="cottageNumbers" name="cottageNumbers" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="bookerName">Booker's name:</label>
+            <input type="text" id="bookerName" name="bookerName" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="bookerEmail">Booker's email address:</label>
+            <input type="email" id="bookerEmail" name="bookerEmail" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="bookerPhone">Booker's telephone number:</label>
+            <input type="tel" id="bookerPhone" name="bookerPhone" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="parkDestination">Park of destination:</label>
+            <input type="text" id="parkDestination" name="parkDestination" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="bookingNumber">Booking number:</label>
+            <input type="text" id="bookingNumber" name="bookingNumber" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="stayBegin">Stay begin:</label>
+            <input type="date" id="stayBegin" name="stayBegin" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="stayEnd">Stay end:</label>
+            <input type="date" id="stayEnd" name="stayEnd" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="cottageType">Cottage type:</label>
+            <input type="text" id="cottageType" name="cottageType" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="adultsCount">Number of adults:</label>
+            <input type="number" id="adultsCount" name="adultsCount" min="1" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="childrenCount">Number of children:</label>
+            <input type="number" id="childrenCount" name="childrenCount" min="0" value="0">
+        </div>
+        
+        <div class="form-group">
+            <label for="babiesCount">Number of babies:</label>
+            <input type="number" id="babiesCount" name="babiesCount" min="0" value="0">
+        </div>
+        
+        <div class="form-group">
+            <label for="marketOrigin">Market of origin:</label>
+            <input type="text" id="marketOrigin" name="marketOrigin" required>
+        </div>
+        
+        <button type="submit">Valider la réservation</button>
+    </form>
+    
+    <script>
+        // Écouter les modifications du champ URL de redirection
+        document.getElementById('redirectUrl').addEventListener('input', function(e) {
+            // Mettre à jour l'attribut action du formulaire
+            document.getElementById('reservationForm').action = e.target.value;
+        });
+
+        document.getElementById('reservationForm').addEventListener('submit', function(e) {
+            // Récupérer l'URL de redirection
+            const redirectUrl = document.getElementById('redirectUrl').value;
+            
+            // Vérifier si une URL valide a été saisie
+            if (redirectUrl) {
+                // Définir l'URL comme action du formulaire
+                this.action = redirectUrl;
+                // Le formulaire sera soumis normalement vers l'URL spécifiée
+            } else {
+                // Empêcher la soumission si aucune URL n'est fournie
+                e.preventDefault();
+                alert('Veuillez saisir une URL de redirection valide.');
+            }
+        });
+    </script>
+</body>
+</html>
