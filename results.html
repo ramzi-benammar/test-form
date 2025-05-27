@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Données de réservation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Données de réservation reçues</h1>
+    
+    <div id="result">
+        <!-- Les résultats seront affichés ici -->
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Fonction pour récupérer les paramètres d'URL
+            function getUrlParams() {
+                const params = new URLSearchParams(window.location.search);
+                return params;
+            }
+
+            // Récupérer les données et les afficher
+            const params = getUrlParams();
+            const resultDiv = document.getElementById('result');
+            
+            if (params.toString()) {
+                let html = "<h2>Informations de réservation :</h2>";
+                
+                // Construire HTML pour chaque paramètre
+                html += `<p><strong>Cottage number(s):</strong> ${params.get('cottageNumbers') || 'Non spécifié'}</p>`;
+                html += `<p><strong>Booker's name:</strong> ${params.get('bookerName') || 'Non spécifié'}</p>`;
+                html += `<p><strong>Booker's email:</strong> ${params.get('bookerEmail') || 'Non spécifié'}</p>`;
+                html += `<p><strong>Booker's phone:</strong> ${params.get('bookerPhone') || 'Non spécifié'}</p>`;
+                html += `<p><strong>Park of destination:</strong> ${params.get('parkDestination') || 'Non spécifié'}</p>`;
+                html += `<p><strong>Booking number:</strong> ${params.get('bookingNumber') || 'Non spécifié'}</p>`;
+                html += `<p><strong>Stay begin:</strong> ${params.get('stayBegin') || 'Non spécifié'}</p>`;
+                html += `<p><strong>Stay end:</strong> ${params.get('stayEnd') || 'Non spécifié'}</p>`;
+                html += `<p><strong>Cottage type:</strong> ${params.get('cottageType') || 'Non spécifié'}</p>`;
+                html += `<p><strong>Number of adults:</strong> ${params.get('adultsCount') || 'Non spécifié'}</p>`;
+                html += `<p><strong>Number of children:</strong> ${params.get('childrenCount') || 'Non spécifié'}</p>`;
+                html += `<p><strong>Number of babies:</strong> ${params.get('babiesCount') || 'Non spécifié'}</p>`;
+                html += `<p><strong>Market of origin:</strong> ${params.get('marketOrigin') || 'Non spécifié'}</p>`;
+                
+                resultDiv.innerHTML = html;
+            } else {
+                resultDiv.innerHTML = "<p>Aucune donnée reçue.</p>";
+            }
+        });
+    </script>
+</body>
+</html>
